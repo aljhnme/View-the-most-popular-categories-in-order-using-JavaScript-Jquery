@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+ <div class="container">
+ 	 <h2>Skills</h2>
+      <div id="skill" class="b_php_0">
+            <h3>PHP</h3>
+            <h4><span id="R_php">0</span>%</h4>
+            <span class="skill-bar"></span>
+            <span class="fill-bar php_b"></span>
+      </div> 
+
+      <div id="skill" class="b_js_0">
+            <h3>JavaScript</h3>
+            <h4><span id="R_js">0</span>%</h4>
+            <span class="skill-bar"></span>
+            <span class="fill-bar js_b"></span>
+      </div>
+
+      <div id="skill" class="b_html_0">
+            <h3>HTML</h3>
+            <h4><span id="R_html">0</span>%</h4>
+            <span class="skill-bar"></span>
+            <span class="fill-bar html_b"></span>
+      </div> 
+
+      <div id="skill" class="b_css_0">
+            <h3>CSS</h3>
+            <h4><span id="R_css">0</span>%</h4>
+            <span class="skill-bar"></span>
+            <span class="fill-bar css_b"></span>
+      </div>          
+   </div>
+
+   <select onchange="select_s()" id="skills" style="width:200px;margin-left:22px;">
+   	 <option selected>Open this select menu</option>
+   	 <option value="php">php</option>
+   	 <option value="js">JavaScript</option>
+   	 <option value="html">html</option>
+   	 <option value="css">css</option>
+   </select>
+</body>
+<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="MoveTop.js"></script>
+<script type="text/javascript">
+  function select_s()
+  {
+  	var st_vidsk=document.getElementById('skills');
+
+  	sk_n=st_vidsk.value;
+    name_cr='R_'+sk_n;
+
+    var rb_sk=document.getElementById(name_cr);
+    var Rate_cu_b=parseInt(rb_sk.innerText);
+    
+    
+    if (Rate_cu_b != 100) 
+    {
+    	rb_sk.innerText=Rate_cu_b+10;
+        var Curr_sk_clname='b_'+sk_n+'_'+Rate_cu_b;
+        
+        G_NSfirst_r=0;
+        $('*[class^="b_"]').each(function(){
+           
+           cl_skb=$(this).attr('class');
+           var number_R=parseInt(cl_skb.match(/\d+/));
+
+           if (number_R <= Rate_cu_b) 
+             {
+               if (G_NSfirst_r != 1) 
+               {
+                  $('.'+Curr_sk_clname).Move_El_Top({
+                      
+                      target: $('.'+cl_skb),
+                      speed: 500,
+                      opacity: 0.8
+                  });
+               }
+               G_NSfirst_r=1;
+             }
+        });
+        $('.'+Curr_sk_clname).attr('class','b_'+sk_n+'_'+(Rate_cu_b+10));
+    	$('.'+sk_n+'_b').animate({width:Rate_cu_b+10+'%'},700);
+    }
+    st_vidsk.selectedIndex=0;
+  }
+</script>
+</html>
